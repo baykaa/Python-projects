@@ -7,10 +7,10 @@ print(logo)
 game_on = True
 score = 0
 
+option_a = random.choice(data)
 option_b = random.choice(data)
 
 while(game_on):
-  option_a = random.choice(data)
   if option_a == option_b:
     option_b = random.choice(data)
 
@@ -32,7 +32,7 @@ while(game_on):
         
         print(f"You're right! Current score: {score} \n")
       else:
-        print(f"You are wrong, game over! Your final score { score }")
+        print(f"You are wrong, game over! Your final score: { score }")
         game_on = False
         
     if answer == 'B':
@@ -46,7 +46,7 @@ while(game_on):
         
         print(f"You're right! Current score: {score} \n")
       else:
-        print(f"You are wrong, game over! Your final score { score }")
+        print(f"You are wrong, game over! Your final score: { score }")
         game_on = False
         
   else:
