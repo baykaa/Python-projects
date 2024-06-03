@@ -11,9 +11,11 @@ print(fo) # io.TextIOWrapper name='dummyFile.txt' mode='w+' encoding='UTF-8'
 
 
 #5 - What does the close() method do on a file object?
-# fo.close()
+#Its closes the file
+fo.close()
 
 
-# fo = open("dummyFile.txt", "w+")
-# for i in range(10):
-#     fo.write("This is line %d\r\n" % (i+1))
+fo = open("dummyFile.txt", "w+")
+for i in range(10):
+    fo.write("This is line %d\r\n" % (i+1))
+
