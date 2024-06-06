@@ -56,8 +56,29 @@
 #     else:
 #         print(result)
 #     finally:
-#         print("Successful!")
+#         print("Function executed successful!")
 
 # user_input = input("Input int: ")
 # square_root(user_input)
 
+
+
+#EXCEPTION
+#Exercise - 1
+def readposint():
+    while True:
+        try:
+            num = input("Please enter a positive integer: ")
+            if not num:
+                print("No input provided. Please try again.")
+                continue
+            num = int(num)
+            if num > 0:
+                print("It is psotive number!")
+                break
+            else:
+                print("The number is not positive. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a valid positive integer.")
+
+readposint()

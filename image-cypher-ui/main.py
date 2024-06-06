@@ -11,7 +11,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('XOR Image Encryption')
-        self.setGeometry(100, 100, 1200, 600)
+        self.setGeometry(200, 200, 900, 600)
         
         # Set up the main layout
         main_layout = QHBoxLayout()
