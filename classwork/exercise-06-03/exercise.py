@@ -1,21 +1,22 @@
 # # Exercise 1
-# def add_integers(a, b):
-#     try: 
-#         b = int(b)
-#         result =  a + b
-#     except TypeError:
-#         print("Type is wrong!")
-#     except ValueError:
-#         print("Value error!")
-#     else:
-#         print("Result:", result) 
-#     finally:
-#         print("Successful")
+def add_integers(a, b):
+    try: 
+        b = int(b)
+        # a = int(a)
+        result =  a + b
+    except TypeError:
+        print("Type is wrong!")
+    except ValueError:
+        print("Value error!")
+    else:
+        return result
+    finally:
+        print("Successful")
     
-# a = input("A: ")
-# b = input("B: ")
+a = input("A: ")
+b = input("B: ")
 
-# add_integers(a,b)
+print(add_integers(a,b))
 
 
 # Exercise 2:
@@ -27,7 +28,7 @@
 #     else:
 #         print(s)
 #     finally:
-#         print("Successful!")
+#         print("Function executed successful!!")
 
 # s = input("Input: ")
 # convert_to_int(s)
@@ -65,20 +66,20 @@
 
 #EXCEPTION
 #Exercise - 1
-def readposint():
-    while True:
-        try:
-            num = input("Please enter a positive integer: ")
-            if not num:
-                print("No input provided. Please try again.")
-                continue
-            num = int(num)
-            if num > 0:
-                print("It is psotive number!")
-                break
-            else:
-                print("The number is not positive. Please try again.")
-        except ValueError:
-            print("Invalid input. Please enter a valid positive integer.")
+# def readposint():
+#     while True:
+#         try:
+#             num = input("Please enter a positive integer: ")
+#             if not num:
+#                 print("No input provided. Please try again.")
+#                 continue
+#             num = int(num)
+#             if num > 0:
+#                 print("It is psotive number!")
+#                 break
+#             else:
+#                 print("The number is not positive. Please try again.")
+#         except ValueError:
+#             print("Invalid input. Please enter a valid positive integer.")
 
-readposint()
+# readposint()
