@@ -1,0 +1,6 @@
+Name 	Score
+joe	10
+bill	23
+sue	8
+grace	12
+john	14
