@@ -26,4 +26,7 @@ newfile = open("new.txt", "r")
 print(newfile.read())
 
 import os
-os.remove("new.txt")
+if os.path.exists("demofile.txt"):
+  os.remove("demofile.txt")
+else:
+  print("The file does not exist")

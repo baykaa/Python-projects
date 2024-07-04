@@ -44,3 +44,12 @@
 #     aline = f.readline()
 
 # f.close()
+
+# Task4
+# import numpy as np
+
+# def plotRegression():
+#     f = open("classwork/exercise-06-10/labdata.txt", "r")
+    
+#     x = []
+#     y = []

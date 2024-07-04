@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         # Center layout for encryption process
         center_layout = QVBoxLayout()
         
-        self.encrypt_label = QLabel('encrypt')
+        self.encrypt_label = QLabel('Encrypt')
         self.encrypt_label.setFixedSize(100, 40)
         self.encrypt_label.setAlignment(Qt.AlignCenter)
         center_layout.addWidget(self.encrypt_label)

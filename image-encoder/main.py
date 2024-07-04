@@ -39,7 +39,7 @@ def xor_encrypt(image_codes, key):
         encrypted_image.append(encrypted_row)
     return encrypted_image
 
-image = Image.open("pic.png")
+image = Image.open("image-encoder/pic.png")
 image_codes = np.array(image)
 
 should_end = False
