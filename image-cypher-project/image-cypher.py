@@ -5,6 +5,7 @@ import string
 import numpy as np
 from PIL import Image, ImageTk
 import os
+import requests
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"/Users/deathday/PycharmProjects/build/assets/frame0")
@@ -13,47 +14,7 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"/Users/deathday/PycharmProjects/build/assets/
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-
-def generate_password(length=16):
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(characters) for i in range(length))
-    entry_1.delete(0, 'end')
-    entry_1.insert(0, password)
-
-
-def xor_encrypt(image_path, key, output_path):
-    # Open file for reading purpose
-    with open(image_path, 'rb') as fin:
-        # Storing image data in variable "image"
-        image = fin.read()
-    
-    # Converting image into byte array to perform encryption easily on numeric data
-    image = bytearray(image)
-
-    # Convert key to bytes and resize to match the image length
-    key_bytes = np.frombuffer(key.encode(), dtype=np.uint8)
-    key_repeated = np.resize(key_bytes, len(image))
-
-    # Performing XOR operation on each value of bytearray
-    encrypted_image = np.bitwise_xor(image, key_repeated)
-
-    # Opening file for writing purpose
-    with open(output_path, 'wb') as fout:
-        # Writing encrypted data in image
-        fout.write(encrypted_image)
-
-    print(f'Encryption Done with key: {key}')
-
-
-def get_next_filename(directory, base_filename, extension):
-    i = 1
-    while True:
-        filename = f"{base_filename}_{i}.{extension}"
-        if not os.path.exists(os.path.join(directory, filename)):
-            return filename
-        i += 1
-
-
+# 2 - Add upload function
 def upload_file():
     file_path = filedialog.askopenfilename()
     if file_path:
@@ -74,7 +35,26 @@ def upload_file():
         canvas.create_image(305, 368, image=original_image_tk, anchor="center")
         canvas.image = original_image_tk
 
+# 4 - Add password generation function
+def generate_password(length = 16):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for i in range(length))
+    entry_1.delete(0, 'end')
+    entry_1.insert(0, password)
 
+def api_password(length='16'):
+    api_url = 'https://api.api-ninjas.com/v1/passwordgenerator?length={}'.format(length)
+    response = requests.get(api_url, headers={'X-Api-Key': 'jFkXpJH4+SxxKnwov9mD5Q==tTehIShdbVrjJXYw'})
+    
+    if response.status_code == requests.codes.ok:
+        password_data = response.json()  # Convert the response to JSON
+        entry_1.delete(0, 'end')
+        entry_1.insert(0, password_data["random_password"])  # Access the JSON data correctly
+        print("API generated password:", password_data["random_password"])
+    else:
+        print("Error:", response.status_code, response.text)
+
+# 5 - Add encryption functionality
 def encrypt_image():
     if not original_image_path:
         messagebox.showerror("Error", "No file uploaded!")
@@ -112,6 +92,36 @@ def encrypt_image():
     messagebox.showinfo("Success", f"Image encrypted and saved as {filename}")
 
 
+def get_next_filename(directory, base_filename, extension):
+    i = 1
+    while True:
+        filename = f"{base_filename}_{i}.{extension}"
+        if not os.path.exists(os.path.join(directory, filename)):
+            return filename
+        i += 1
+
+# XOR Encrpytion functionality
+def xor_encrypt(image_path, key, output_path):
+    with open(image_path, 'rb') as fin:
+        image = fin.read() # Storing image data 
+
+    image = bytearray(image) #convert to byte array
+
+    # Convert key to bytes and resize to match the image length
+    key_bytes = np.frombuffer(key.encode(), dtype=np.uint8)
+    key_repeated = np.resize(key_bytes, len(image))
+
+    # Performing XOR operation on each value of bytearray
+    encrypted_image = np.bitwise_xor(image, key_repeated)
+
+    # Opening file for writing purpose
+    with open(output_path, 'wb') as fout:
+        fout.write(encrypted_image)
+
+    print(f'Encryption Done with key: {key}')
+
+
+# 1-  Create display screen frame
 window = Tk()
 
 window.geometry("1553x757")
@@ -165,7 +175,7 @@ button_2 = Button(
     text="Generate password",
     borderwidth=0,
     highlightthickness=0,
-    command=generate_password,
+    command=api_password,
     relief="flat",
     bg="#FFC107",
     fg="#000000",
@@ -195,6 +205,7 @@ button_3.place(
     height=48.0
 )
 
+# 3 - Create password entry
 entry_1 = Entry(
     bd=0,
     bg="#F7F7F7",
